@@ -14,10 +14,10 @@ function comecarEtapa() {
 
   let numeroHTML = '';
 
-  for(let i = 0;i < etapa.numeros; i++) {
-    if(i===0) {
+  for (let i = 0; i < etapa.numeros; i++) {
+    if (i === 0) {
       numeroHTML = '<div class="numero pisca"></div>'
-    }else {
+    } else {
       numeroHTML += '<div class="numero"></div>'
     }
   }
@@ -32,27 +32,44 @@ function comecarEtapa() {
 function atualizaInterface() {
   let etapa = etapas[etapaAtual]
   let candidato = etapa.candidatos.filter((item) => {
-    if(item.numero === numero) {
+    if (item.numero === numero) {
       return true;
-    }else {
+    } else {
       return false;
     }
   })
-  console.log('Candidato', candidato)
-  
+  if (candidato.length > 0) {
+    candidato = candidato[0]
+    seuVotoPara.style.display = 'block'
+    aviso.style.display = 'block'
+    descricao.innerHTML = `Nome: ${candidato.nome}<br/> Partido: ${candidato.partido}`
+    
+    let fotosHtml = '';
+    for(let i in candidato.fotos){
+      fotosHtml += `<div class="d-1-image">
+      <img src="./imgs/${candidato.fotos[i].url}" alt="img1">
+      ${candidato.fotos[i].legenda}
+    </div>`
+    }
+    lateral.innerHTML = fotosHtml;
+  }else {
+    seuVotoPara.style.display = 'block'
+    aviso.style.display = 'block'
+    descricao.innerHTML = '<div class="aviso--grande pisca">VOTO NULO</div>'
+  }
 }
 
 function clicou(n) {
   let elementoNumero = document.querySelector('.numero.pisca')
-  if(elementoNumero !== null) {
+  if (elementoNumero !== null) {
     elementoNumero.innerHTML = n
     numero = `${numero}${n}`;
 
     elementoNumero.classList.remove('pisca')
-    if(elementoNumero.nextElementSibling !== null){
+    if (elementoNumero.nextElementSibling !== null) {
       // adiciona no proximo elemento a classe pisca
       elementoNumero.nextElementSibling.classList.add('pisca')
-    }else {
+    } else {
       atualizaInterface();
     }
   }

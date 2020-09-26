@@ -108,6 +108,14 @@ body {
   flex: 1;
   line-height: 30px;
 }
+.aviso--grande {
+  font-size: 40px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
 .d-1-right {
   width: 90px;
   display: flex;
