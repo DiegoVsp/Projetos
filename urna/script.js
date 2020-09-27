@@ -15,7 +15,7 @@ function comecarEtapa() {
   let etapa = etapas[etapaAtual]
 
   let numeroHTML = '';
-  numero ='';
+  numero = '';
   vtbranco = false;
 
   for (let i = 0; i < etapa.numeros; i++) {
@@ -47,24 +47,24 @@ function atualizaInterface() {
     seuVotoPara.style.display = 'block'
     aviso.style.display = 'block'
     descricao.innerHTML = `Nome: ${candidato.nome}<br/> Partido: ${candidato.partido}`
-    
+
     let fotosHtml = '';
-    for(let i in candidato.fotos){
-      if(candidato.fotos[i].small){
+    for (let i in candidato.fotos) {
+      if (candidato.fotos[i].small) {
         fotosHtml += `<div class="d-1-image small">
         <img src="./imgs/${candidato.fotos[i].url}" alt="img1">
         ${candidato.fotos[i].legenda}
       </div>`
-      }else{
+      } else {
         fotosHtml += `<div class="d-1-image">
         <img src="./imgs/${candidato.fotos[i].url}" alt="img1">
         ${candidato.fotos[i].legenda}
       </div>`
-        
+
       }
     }
     lateral.innerHTML = fotosHtml;
-  }else {
+  } else {
     seuVotoPara.style.display = 'block'
     aviso.style.display = 'block'
     descricao.innerHTML = '<div class="aviso--grande pisca">VOTO NULO</div>'
@@ -87,13 +87,13 @@ function clicou(n) {
   }
 }
 function branco() {
-  if(numero === '') {
+  if (numero === '') {
     vtbranco = true;
     seuVotoPara.style.display = 'block'
     aviso.style.display = 'block'
     numeros.innerHTML = '';
     descricao.innerHTML = '<div class="aviso--grande pisca">VOTO EM BRANCO</div>'
-  }else {
+  } else {
     alert('Para votar em branco não deve ter digitado nenhum número')
   }
 }
@@ -104,29 +104,29 @@ function confirma() {
   let etapa = etapas[etapaAtual]
 
   let votoConfirmado = false;
-   if(vtbranco) {
-     votoConfirmado = true;
+  if (vtbranco) {
+    votoConfirmado = true;
     votos.push({
       etapa: etapas[etapaAtual].titulo,
       voto: 'branco'
     })
-  }else if (numero.length === etapa.numeros){
+  } else if (numero.length === etapa.numeros) {
     votoConfirmado = true;
     votos.push({
       etapa: etapas[etapaAtual].titulo,
       voto: numero
     })
   }
-  if(votoConfirmado){
+  if (votoConfirmado) {
     etapaAtual++;
-    if(etapas[etapaAtual]!== undefined){
+    if (etapas[etapaAtual] !== undefined) {
       comecarEtapa()
-    }else {
-      document.querySelector('.tela').innerHTML= '<div class="aviso--gigante pisca">FIM</div>'
+    } else {
+      document.querySelector('.tela').innerHTML = '<div class="aviso--gigante pisca">FIM</div>'
       console.log(votos)
+      etapaAtual = 0
     }
   }
-  
 }
 
 comecarEtapa()
