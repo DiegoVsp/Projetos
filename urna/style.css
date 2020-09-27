@@ -144,6 +144,14 @@ font-size: 12px;
   line-height: 1.1em;
   padding-left: 10px;
 }
+.aviso--gigante {
+  font-size: 70px;
+  font-weight: bold;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 @keyframes pisca {
   0% {
